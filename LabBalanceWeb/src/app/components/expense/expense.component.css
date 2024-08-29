@@ -1,0 +1,6 @@
+.spaced-span {
+  margin-right: 2px; /* Adds 10px of space to the right of each span */
+}
+.spaced-span:last-child {
+  margin-right: 0; /* Removes the margin from the last span to prevent extra space */
+}

@@ -1,0 +1,66 @@
+<div nz-row>
+  <h3 nz-card-grid nzSpan="8" nz-col [ngStyle]="gridStyle">Balance:
+    <span style="color:slateblue;">${{stats?.balance}}</span>
+  </h3>
+  <h3 nz-card-grid nzSpan="8" nz-col [ngStyle]="gridStyle">Total Income:
+    <span style="color:green;">${{stats?.income}}</span>
+  </h3>
+  <h3 nz-card-grid nzSpan="8" nz-col [ngStyle]="gridStyle">Total Expense:
+    <span style="color:red;">${{stats?.expense}}</span>
+  </h3>
+</div>
+
+<div nz-row style="margin-top:20px;">
+  <div nz-col nzFlex="1 1 200px">
+    <nz-card nzType="inner" nzTitle="Financial Summary">
+      <!-- Chart container placed inside the card -->
+      <div #circularChartRef style="width: 100%; height: 400px;"></div>
+
+    </nz-card>
+  </div>
+
+  <div nz-col nzFlex="0 1 300px" style="margin-left: 15px;">
+    <nz-card nzType="inner" nzTitle="Recent History">
+      <div nz-card-grid style="width:100%;">
+        <span style="color:green;">Latest Income : +{{stats?.latestIncome?.amount}} {{stats?.latestIncome?.title}}</span>
+      </div>
+      <div nz-card-grid style="width:100%;">
+        <span style="color:red;">Latest Expense : -{{stats?.latestExpense?.amount}} {{stats?.latestExpense?.title}}</span>
+      </div>
+    </nz-card>
+
+    <nz-card nzType="inner" nzTitle="Income">
+      <nz-row>
+        <nz-col nzXs="12">Minimum: {{stats?.minIncome}}</nz-col>
+        <nz-col nzXs="12">Maximum: {{stats?.maxIncome}}</nz-col>
+      </nz-row>
+    </nz-card>
+
+    <nz-card nzType="inner" nzTitle="Expense">
+      <nz-row>
+        <nz-col nzXs="12">Minimum: {{stats?.minExpense}}</nz-col>
+        <nz-col nzXs="12">Maximum: {{stats?.maxExpense}}</nz-col>
+      </nz-row>
+    </nz-card>
+  </div>
+</div>
+
+<div nz-row style="margin-top:20px;">
+  <div nz-col nzFlex="1 1 200px">
+    <nz-card nzType="inner" nzTitle="Income Chart">
+      <div #incomeLineChartRef style="width: 100%; height: 400px;"></div>
+    </nz-card>
+  </div>
+</div>
+
+<div nz-row style="margin-top:20px;">
+  <div nz-col nzFlex="1 1 200px">
+    <nz-card nzType="inner" nzTitle="Expense Chart">
+      <!-- Add chart container if you want to display another chart -->
+      <div #expenseLineChartRef style="width: 100%; height: 400px;"></div>
+    </nz-card>
+
+
+
+  </div>
+</div>

@@ -1,0 +1,32 @@
+<nz-layout class="layout">
+  <!-- Sidebar Section -->
+  <nz-sider>
+    <div class="logo">
+      <img src="assets/talklablogo.png" alt="TalkLab Logo">
+    </div>
+    <!-- Menu Section -->
+    <ul nz-menu nzTheme="dark" nzMode="inline">
+      <li nz-menu-item routerLink="/">
+        <span nz-icon nzType="pie-chart"></span>
+        <span>Dashboard</span>
+      </li>
+      <li nz-menu-item routerLink="/income">
+        <span nz-icon nzType="rise"></span>
+        <span>Income</span>
+      </li>
+      <li nz-menu-item routerLink="/expense">
+        <span nz-icon nzType="fall"></span>
+        <span>Expense</span>
+      </li>
+    </ul>
+  </nz-sider>
+
+  <!-- Content Section -->
+  <nz-layout class="right-layout">
+    <nz-content>
+      <div class="inner-content">
+        <router-outlet></router-outlet>
+      </div>
+    </nz-content>
+  </nz-layout>
+</nz-layout>

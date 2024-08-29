@@ -1,0 +1,91 @@
+
+.logo {
+  display: flex;
+  justify-content:center;
+  align-items: center;
+  height: 100px;             /* Increase the height to make the image larger */
+  margin: 16px;
+  padding: 0 16px;
+  color: white;
+}
+
+.logo img {
+  width: 115%;               /* Image width set to 100% to fill the container */
+  height: auto;              /* Maintain aspect ratio */
+  border: none;              /* Remove the border (frame) */
+  box-shadow: none;          /* Remove the shadow */
+  object-fit: contain;       /* Ensure the image fits within the container without distortion */
+}
+
+
+
+
+.user-info{
+  display:flex;
+  flex-direction: column;
+}
+
+.user-info strong{
+  font-size: 16px;
+}
+
+.user-info span{
+  font-size:13px;
+
+}
+
+.layout{
+  min-height: 100vh;
+}
+
+nz-sider{
+  overflow:auto;
+  height:100%;
+  position: fixed;
+  left:0;
+}
+
+.right-layout{
+  margin-left:200px;
+}
+
+nz-header{
+  padding:0;
+  height:75px;
+}
+
+nz-content{
+  margin:24px 16px 0;
+  overflow: initial;
+}
+
+.inner-content{
+  padding:24px;
+  background: white;
+  text-align: center;
+}
+
+nz-footer{
+  text-align: center;
+}
+nz-sider {
+  overflow: auto;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  background-color: #001f3f; /* Example: Dark grey background */
+}
+
+ul[nz-menu][nzTheme="dark"] {
+  background-color: #001f3f;  /* Dark Navy Blue background */
+}
+
+/* Ensuring the text color contrasts well with the dark background */
+ul[nz-menu][nzTheme="dark"] li {
+  color: #ffffff;  /* White text for readability */
+}
+
+/* Optionally, customize the color of icons within the menu */
+ul[nz-menu][nzTheme="dark"] .anticon {
+  color: #ffffff;  /* White icons */
+}
