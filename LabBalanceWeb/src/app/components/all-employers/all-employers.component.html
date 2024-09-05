@@ -1,0 +1,13 @@
+<div class="bg">
+  <div class="list-item" *ngFor="let employee of employees">
+    <img class="profile-image" [src]="updateImg(employee.returnedImg)" alt="{{employee.firstname}}">
+
+    <div class="employee-details">
+      <h2>{{employee.firstname}} {{employee.lastname}}</h2>
+    </div>
+
+    <div class="action-buttons">
+      <button nz-button nzType="primary" [routerLink]="['/profile', employee.id]" class="view-button">View Details</button>
+    </div>
+  </div>
+</div>

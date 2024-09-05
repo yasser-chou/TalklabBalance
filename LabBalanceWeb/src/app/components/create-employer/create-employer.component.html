@@ -1,0 +1,81 @@
+<div style="background-color: #f8f8f8;">
+  <div class="parent">
+    <div class="child">
+
+      <div class="imgDiv">
+        <h2>Add New Employee</h2>
+      </div>
+
+      <form nz-form [formGroup]="validateForm" (ngSubmit)="postEmployee()">
+        <div nz-row>
+          <div nz-col [nzMd]="24" [nzSm]="24" [nzXs]="24">
+            <div class="profile-badge">
+              <!-- Image preview container with default image -->
+              <div class="image-preview-container">
+                <img class="profile" [src]="imagePreview || 'assets/Greydefault.jpg'" alt="Employer Image" />
+              </div>
+              <!-- Upload button that triggers the file input -->
+              <button type="button" class="upload-button" onclick="document.getElementById('upload_profile_image').click()">Upload Image</button>
+              <input id="upload_profile_image" type="file" accept="image/x-png,image/gif,image/jpeg" (change)="onFileSelected($event)" style="display:none;" />
+            </div>
+          </div>
+          <div nz-col nzSpan="24" style="margin-top: 20px">
+            <nz-form-item>
+              <nz-form-control nzHasFeedback [nzXs]="24" nzErrorTip="This input is required!">
+                <input nz-input placeholder=" FirstName" formControlName="firstname" />
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <div nz-col nzSpan="24" style="margin-top: 20px">
+            <nz-form-item>
+              <nz-form-control nzHasFeedback [nzXs]="24" nzErrorTip="This input is required!">
+                <input nz-input placeholder=" LastName" formControlName="lastname" />
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <div nz-col nzSpan="24" style="margin-top: 20px">
+            <nz-form-item>
+              <nz-form-control nzHasFeedback [nzXs]="24" nzErrorTip="This input is required!">
+                <input nz-input placeholder="Email " formControlName="email" type="email"/>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <div nz-col nzSpan="24" style="margin-top: 20px">
+            <nz-form-item>
+              <nz-form-control nzHasFeedback [nzXs]="24" nzErrorTip="This input is required!">
+                <input nz-input placeholder="Phone" formControlName="phone" type="tel"/>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <div nz-col nzSpan="24" style="margin-top: 20px">
+            <nz-form-item>
+              <nz-form-control nzHasFeedback [nzXs]="24" nzErrorTip="This input is required!">
+                <input nz-input placeholder="Position" formControlName="position" />
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+
+          <div nz-col nzSpan="24">
+            <nz-form-item>
+              <nz-form-control nzHasFeedback [nzXs]="24" nzErrorTip="This input is required!">
+                <input nz-input placeholder="Salary" formControlName="salary" type="number" />
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+
+          <div nz-col nzSpan="24" style="margin-top: 20px">
+            <nz-form-item>
+              <nz-form-control nzHasFeedback [nzXs]="24" nzErrorTip="This input is required!">
+                <nz-date-picker style="width: 100%;" formControlName="startDate"></nz-date-picker>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+
+
+
+        </div>
+        <button nz-button class="login-form-button" [nzType]="'primary'">Add</button>
+      </form>
+    </div>
+  </div>
+</div>

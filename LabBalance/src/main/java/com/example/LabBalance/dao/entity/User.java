@@ -1,5 +1,6 @@
 package com.example.LabBalance.dao.entity;
 
+import com.example.LabBalance.dto.UserDTO;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -24,6 +25,20 @@ public class User {
     private boolean firstLogin = true;
 
     private boolean enabled = true;
+
+
+    public UserDTO getDTO(){
+        UserDTO userDto = new UserDTO();
+        userDto.setId(id);
+        userDto.setFirstname(firstname);
+        userDto.setUsername(username);
+
+
+
+        return userDto;
+
+
+    }
 
 
 

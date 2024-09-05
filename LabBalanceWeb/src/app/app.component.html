@@ -1,32 +1,68 @@
-<nz-layout class="layout">
-  <!-- Sidebar Section -->
-  <nz-sider>
-    <div class="logo">
-      <img src="assets/talklablogo.png" alt="TalkLab Logo">
-    </div>
-    <!-- Menu Section -->
-    <ul nz-menu nzTheme="dark" nzMode="inline">
-      <li nz-menu-item routerLink="/">
-        <span nz-icon nzType="pie-chart"></span>
-        <span>Dashboard</span>
-      </li>
-      <li nz-menu-item routerLink="/income">
-        <span nz-icon nzType="rise"></span>
-        <span>Income</span>
-      </li>
-      <li nz-menu-item routerLink="/expense">
-        <span nz-icon nzType="fall"></span>
-        <span>Expense</span>
-      </li>
-    </ul>
-  </nz-sider>
-
-  <!-- Content Section -->
-  <nz-layout class="right-layout">
-    <nz-content>
-      <div class="inner-content">
-        <router-outlet></router-outlet>
+<!-- Main layout, only visible when not on the register or login page -->
+<div *ngIf="!isRegisterPage && !isLoginPage && !isModalActive">
+  <nz-layout class="layout">
+    <!-- Sidebar Section -->
+    <nz-sider>
+      <div class="logo">
+        <img src="assets/talklablogo.png" alt="TalkLab Logo">
       </div>
-    </nz-content>
+      <ul nz-menu nzTheme="dark" nzMode="horizontal">
+        <li nz-menu-item routerLink="/dashboard">
+          <span nz-icon nzType="pie-chart"></span>
+          <span>Dashboard</span>
+        </li>
+        <li nz-menu-item routerLink="/income">
+          <span nz-icon nzType="rise"></span>
+          <span>Income</span>
+        </li>
+        <li nz-menu-item routerLink="/expense">
+          <span nz-icon nzType="fall"></span>
+          <span>Expense</span>
+        </li>
+        <!-- Employee Dropdown -->
+        <li nz-submenu>
+          <span title>
+            <span nz-icon nzType="user"></span>
+            <span>Employers</span>
+          </span>
+          <ul>
+            <li nz-menu-item routerLink="employee/create">
+              <span nz-icon nzType="user-add"></span>
+              <span>Add Employee</span>
+            </li>
+            <li nz-menu-item routerLink="employee/all">
+              <span nz-icon nzType="team"></span>
+              <span>All Employees</span>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </nz-sider>
+    <!-- Content Section -->
+    <nz-layout class="right-layout">
+      <nz-header class="header">
+        <div class="logout-button" *ngIf="isClientLoggedIn">
+          <a (click)="logout()" routerLinkActive="Active">Logout</a>
+        </div>
+      </nz-header>
+      <nz-content>
+        <div class="inner-content">
+          <router-outlet></router-outlet>
+        </div>
+      </nz-content>
+    </nz-layout>
   </nz-layout>
-</nz-layout>
+</div>
+<!-- Content without sidebar, only for the register page -->
+<div *ngIf="isRegisterPage && !isModalActive">
+  <router-outlet></router-outlet>
+</div>
+<!-- Content without sidebar, only for the login page -->
+<div *ngIf="isLoginPage && !isModalActive">
+  <router-outlet></router-outlet>
+</div>
+<!-- Modal Content -->
+<div *ngIf="isModalActive" class="modal-container">
+  <!-- Your modal component should be displayed here -->
+  <app-password-prompt></app-password-prompt>
+</div>

@@ -1,0 +1,54 @@
+
+<div class="bg">
+  <div class="parent">
+    <div class="child">
+      <div nz-col>
+        <h1 style="margin-left: auto; margin-right: auto; text-align: center; width: fit-content;">New User</h1>
+      </div>
+      <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+
+        <nz-form-item>
+          <nz-form-control nzHasFeedback neErrorTip="the input isn't valid username">
+            <input nz-input placeholder="Username" formControlName="username" id="username" />
+          </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-control nzHasFeedback neErrorTip="the input isn't valid password">
+            <input nz-input type="password" placeholder="Password" formControlName="password" id="password" />
+          </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-control>
+            <input nz-input type="password" placeholder="Confirm Password" formControlName="checkPassword" id="checkPassword" />
+          </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-control>
+            <input nz-input placeholder="FirstName" formControlName="firstname" id="firstname" />
+          </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-control>
+            <input nz-input placeholder="Lastname" formControlName="lastname" id="lastname" />
+          </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-control>
+            <input nz-input placeholder="Phone" formControlName="phone" id="phone" />
+          </nz-form-control>
+        </nz-form-item>
+
+        <button nz-button class="login-form-button login-form-margin" [nzType]="'primary'">
+          Register
+        </button>
+        <br><br>
+      </form>
+    </div>
+  </div>
+</div>
+

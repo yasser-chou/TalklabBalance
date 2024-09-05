@@ -1,0 +1,87 @@
+.profile-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background-color: #f0f2f5;
+  min-height: 100vh;
+}
+
+.profile-card {
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 20px;
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+  transition: transform 0.3s;
+
+  &:hover {
+    transform: translateY(-5px);
+  }
+
+  .profile-image {
+    width: 100%;
+    max-width: 150px;
+    height: auto;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+  }
+
+  h2 {
+    color: #333;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+  .profile-info {
+    margin-bottom: 20px;
+
+    .info-item {
+      display: flex;
+      justify-content: flex-start;
+      margin-bottom: 10px;
+      font-size: 16px;
+      color: #666;
+
+      .attribute-name {
+        width: 150px; /* Fixed width for attribute names */
+        color: #333;
+        text-align: left;
+      }
+
+      .attribute-value {
+        text-align: left;
+      }
+    }
+  }
+
+  .action-buttons {
+    display: flex;
+    justify-content: center; /* Center the buttons horizontally */
+    gap: 10px; /* Space between buttons */
+
+    button {
+      margin-top: 10px;
+      padding: 10px 20px;
+      font-size: 16px;
+      display: flex;
+      align-items: center; /* Center text vertically */
+      justify-content: center; /* Center text horizontally */
+      text-align: center; /* Ensure text is centered */
+    }
+
+    .red {
+      background-color: red;
+      color: white;
+      border: none;
+      &:hover {
+        background-color: darkred;
+      }
+    }
+  }
+}

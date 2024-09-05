@@ -1,0 +1,61 @@
+.bg {
+  background-color: #f0f2f5;
+  min-height: 91vh;
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap; /* Allow items to wrap to the next line if necessary */
+  justify-content: center; /* Center the employee cards */
+  gap: 20px; /* Add space between the cards */
+}
+
+.list-item {
+  width: 300px; /* Set a fixed width for each employee card */
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column; /* Stack image, details, and button vertically */
+  align-items: center;
+  padding: 20px;
+  transition: transform 0.3s;
+}
+
+.list-item:hover {
+  transform: translateY(-5px);
+}
+
+.profile-image {
+  width: 60px; /* Adjust the image size as needed */
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 10px;
+}
+
+.employee-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center the text */
+}
+
+.employee-details h2 {
+  color: #333;
+  font-size: 18px;
+  font-weight: bold;
+  margin: 10px 0; /* Add space above and below the name */
+  text-align: center;
+}
+
+.view-button {
+  margin-top: 30px; /* Add more space between name and button */
+  width: 75%; /* Make the button full-width */
+  text-align: center;
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: center; /* Center the button horizontally */
+  width: 100%;
+}

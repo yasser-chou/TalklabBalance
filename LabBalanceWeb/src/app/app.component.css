@@ -1,91 +1,147 @@
+body {
+  font-family: Arial, sans-serif;
+}
+
+.layout {
+  min-height: 100vh;
+}
 
 .logo {
   display: flex;
-  justify-content:center;
+  justify-content: center;
   align-items: center;
-  height: 100px;             /* Increase the height to make the image larger */
+  height: 100px; /* Increase the height to make the image larger */
   margin: 16px;
   padding: 0 16px;
   color: white;
 }
 
 .logo img {
-  width: 115%;               /* Image width set to 100% to fill the container */
-  height: auto;              /* Maintain aspect ratio */
-  border: none;              /* Remove the border (frame) */
-  box-shadow: none;          /* Remove the shadow */
-  object-fit: contain;       /* Ensure the image fits within the container without distortion */
+  width: 100%; /* Image width set to 100% to fill the container */
+  height: auto; /* Maintain aspect ratio */
+  border: none; /* Remove the border (frame) */
+  box-shadow: none; /* Remove the shadow */
+  object-fit: contain; /* Ensure the image fits within the container without distortion */
+  background-color: #fff;
+  border-radius:90px;
+
+
 }
 
+.header {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0 20px;
+  background-color: #001f3f; /* Matching the default Ant Design color */
+}
 
+.logout-button a {
+  color: #fff; /* White text color */
+  text-decoration: none;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 5px 10px; /* Adding some padding for better spacing inside the border */
+  border: 2px solid red; /* Red frame (border) */
+  background-color: crimson;
+  border-radius: 5px; /* Optional: Adding slight rounding to the corners */
+}
 
+.logout-button a:hover {
+  text-decoration: none;
+  background-color: darkred; /* Darken the background on hover */
+}
 
-.user-info{
-  display:flex;
+.user-info {
+  display: flex;
   flex-direction: column;
 }
 
-.user-info strong{
+.user-info strong {
   font-size: 16px;
 }
 
-.user-info span{
-  font-size:13px;
-
+.user-info span {
+  font-size: 13px;
 }
 
-.layout{
-  min-height: 100vh;
-}
-
-nz-sider{
-  overflow:auto;
-  height:100%;
-  position: fixed;
-  left:0;
-}
-
-.right-layout{
-  margin-left:200px;
-}
-
-nz-header{
-  padding:0;
-  height:75px;
-}
-
-nz-content{
-  margin:24px 16px 0;
-  overflow: initial;
-}
-
-.inner-content{
-  padding:24px;
-  background: white;
-  text-align: center;
-}
-
-nz-footer{
-  text-align: center;
-}
+/* Sidebar Styling */
 nz-sider {
   overflow: auto;
   height: 100%;
   position: fixed;
   left: 0;
-  background-color: #001f3f; /* Example: Dark grey background */
+  background-color: #001f3f; /* Dark Navy Blue background */
 }
 
 ul[nz-menu][nzTheme="dark"] {
-  background-color: #001f3f;  /* Dark Navy Blue background */
+  background-color: #001f3f; /* Dark Navy Blue background */
 }
 
-/* Ensuring the text color contrasts well with the dark background */
 ul[nz-menu][nzTheme="dark"] li {
-  color: #ffffff;  /* White text for readability */
+  color: #ffffff; /* White text for readability */
+  padding: 12px 20px; /* Consistent padding */
+  margin: 0;
+  width: 100%;
+  box-sizing: border-box;
+  border: none; /* Remove any border */
 }
 
-/* Optionally, customize the color of icons within the menu */
+/* Remove any potential underline or focus outline from links */
+ul[nz-menu][nzTheme="dark"] li a {
+  text-decoration: none; /* Remove underline */
+  border: none; /* Remove border */
+  outline: none; /* Remove focus outline */
+}
+
+/* Custom hover color for menu items to match sidebar */
+ul[nz-menu][nzTheme="dark"] li:hover {
+  background-color: #003366; /* Dark Navy Blue hover effect */
+  border: none; /* Remove any border that may appear on hover */
+  border-radius: 4px;
+}
+
+/* Ensuring icons are white in the sidebar */
 ul[nz-menu][nzTheme="dark"] .anticon {
-  color: #ffffff;  /* White icons */
+  color: #ffffff;
+}
+
+/* Remove margin between the menu items */
+ul[nz-menu][nzTheme="dark"] li + li {
+  margin-top: 5px; /* Space between list items */
+}
+
+
+
+.right-layout {
+  margin-left: 200px;
+}
+
+nz-header {
+  padding: 0;
+  height: 75px;
+}
+
+nz-content {
+  margin: 24px 16px 0;
+  overflow: initial;
+}
+
+.inner-content {
+  padding: 24px;
+  background: white;
+  text-align: center;
+}
+
+.modal-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 1000;
 }
