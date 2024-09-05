@@ -2,7 +2,7 @@
   <div class="list-item" *ngIf="employee">
     <div class="profile-card">
       <img class="profile-image" [src]="updateImg(employee.returnedImg)" alt="{{employee.name}}">
-      <h2>{{employee.name}}</h2>
+      <h2>{{employee.firstname}} {{employee.lastname}}</h2>
       <div class="profile-info">
         <div class="info-item">
           <div class="attribute-name"><strong>Email:</strong></div>

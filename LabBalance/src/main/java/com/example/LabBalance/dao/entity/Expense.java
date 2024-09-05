@@ -1,9 +1,6 @@
 package com.example.LabBalance.dao.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDate;
@@ -21,4 +18,7 @@ public class Expense {
     private String category;
     private LocalDate date;
     private Double amount;
+    @ManyToOne
+    @JoinColumn(name = "employer_id", referencedColumnName = "id")
+    private Employee employee; // Many expenses to one employer
 }

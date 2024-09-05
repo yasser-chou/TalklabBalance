@@ -99,6 +99,8 @@ export class CreateEmployerComponent implements OnInit {
             // On success, add employee to the list and show success message
             this.employees.push({email, phone});
             this.notification.success('SUCCESS', 'Employer added successfully', {nzDuration: 5000});
+            this.router.navigateByUrl('employee/all');
+
           },
           error => {
             // Log the full error response for debugging

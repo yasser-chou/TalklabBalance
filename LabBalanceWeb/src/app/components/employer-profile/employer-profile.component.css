@@ -1,87 +1,94 @@
+/* Base container styling */
 .profile-container {
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 20px;
-  background-color: #f0f2f5;
-  min-height: 100vh;
+  background-color: #f4f4f9;
+  font-family: Arial, sans-serif;
+}
+
+.list-item {
+  width: 100%;
+  max-width: 600px;
 }
 
 .profile-card {
   background-color: #ffffff;
+  border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
+  overflow: hidden;
   padding: 20px;
-  width: 100%;
-  max-width: 400px;
   text-align: center;
   transition: transform 0.3s;
+}
 
-  &:hover {
-    transform: translateY(-5px);
-  }
+.profile-card:hover {
+  transform: translateY(-10px);
+}
 
-  .profile-image {
-    width: 100%;
-    max-width: 150px;
-    height: auto;
-    border-radius: 50%;
-    object-fit: cover;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
-  }
+.profile-image {
+  width: 150px;
+  height: 200px; /* Adjust height as needed */
+  object-fit: cover;
+  margin-bottom: 20px;
+}
 
-  h2 {
-    color: #333;
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 10px;
-  }
+.profile-info {
+  text-align: left;
+  margin-top: 20px;
+}
 
-  .profile-info {
-    margin-bottom: 20px;
+.info-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid #e6e6e6;
+}
 
-    .info-item {
-      display: flex;
-      justify-content: flex-start;
-      margin-bottom: 10px;
-      font-size: 16px;
-      color: #666;
+.info-item:last-child {
+  border-bottom: none;
+}
 
-      .attribute-name {
-        width: 150px; /* Fixed width for attribute names */
-        color: #333;
-        text-align: left;
-      }
+.attribute-name {
+  font-weight: bold;
+  color: #333333;
+}
 
-      .attribute-value {
-        text-align: left;
-      }
-    }
-  }
+.attribute-value {
+  color: #666666;
+}
 
-  .action-buttons {
-    display: flex;
-    justify-content: center; /* Center the buttons horizontally */
-    gap: 10px; /* Space between buttons */
+.action-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px; /* Add space between the buttons */
+  margin-top: 20px;
+}
 
-    button {
-      margin-top: 10px;
-      padding: 10px 20px;
-      font-size: 16px;
-      display: flex;
-      align-items: center; /* Center text vertically */
-      justify-content: center; /* Center text horizontally */
-      text-align: center; /* Ensure text is centered */
-    }
+.action-buttons .btn-primary,
+.action-buttons .btn-danger {
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
 
-    .red {
-      background-color: red;
-      color: white;
-      border: none;
-      &:hover {
-        background-color: darkred;
-      }
-    }
-  }
+.action-buttons .btn-primary {
+  background-color: #007bff;
+  color: white;
+}
+
+.action-buttons .btn-danger {
+  background-color: #e44d4d;
+  color: white;
+}
+
+.action-buttons .btn-primary:hover {
+  background-color: #0056b3;
+}
+
+.action-buttons .btn-danger:hover {
+  background-color: #c93030;
 }

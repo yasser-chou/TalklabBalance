@@ -80,7 +80,7 @@ export class UpdateEmployerComponent implements OnInit {
             'Employee Updated Successfully',
             { nzDuration: 5000 }
           );
-          this.router.navigateByUrl('/all');
+          this.router.navigateByUrl('employee/all');
         },
         error => {
           this.notification.error(

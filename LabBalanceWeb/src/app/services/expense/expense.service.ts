@@ -30,4 +30,9 @@ export class ExpenseService {
   updateExpense(id:number,expenseDTO:any):Observable<any>{
     return this.http.put(BASIC_URL+ `api/expense/${id}`,expenseDTO);
   }
+
+  // New method to fetch all employers
+  getAllEmployees(): Observable<any> {
+    return this.http.get(BASIC_URL + 'api/employee/all'); // Assuming this is the endpoint for getting employers
+  }
 }

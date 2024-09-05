@@ -28,7 +28,7 @@
 .profile-image {
   width: 60px; /* Adjust the image size as needed */
   height: 60px;
-  border-radius: 50%;
+  border-radius: 70px;
   object-fit: cover;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   margin-bottom: 10px;

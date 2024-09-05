@@ -48,6 +48,8 @@ export class IncomeComponent {
   submitForm(){
     this.incomeService.postIncome(this.incomeForm.value).subscribe(res=> {
       this.notification.success("Income Posted", "Income posted successfully", {nzDuration: 5000});
+      // Reset the form after successful submission
+      this.incomeForm.reset();
       this.getAllIncomes();
     },error=>{
       this.message.error("Error while posting income",{nzDuration: 5000});

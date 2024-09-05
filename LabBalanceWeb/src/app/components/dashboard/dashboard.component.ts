@@ -265,8 +265,8 @@ export class DashboardComponent implements AfterViewInit {
         this.incomes = res.incomeList;
         this.expenses = res.expenseList;
 
-        console.log('Incomes:', this.incomes);
-        console.log('Chart container element:', this.incomeLineChartRef);
+        console.log('Incomes:', this.incomes);  // Log incomes to check structure
+        console.log('Expenses:', this.expenses);  // Log expenses to check structure
 
         // Ensure this is called after the data is fetched and view is initialized
         this.createLineChart();
@@ -277,4 +277,6 @@ export class DashboardComponent implements AfterViewInit {
       }
     });
   }
+
+
 }
