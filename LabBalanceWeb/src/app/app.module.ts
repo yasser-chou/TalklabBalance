@@ -27,6 +27,7 @@ import { CreateEmployerComponent } from './components/create-employer/create-emp
 import { EmployerProfileComponent } from './components/employer-profile/employer-profile.component';
 import { UpdateEmployerComponent } from './components/update-employer/update-employer.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { UserprofileComponent } from './components/user-profile/userprofile/userprofile.component';
 
 registerLocaleData(en);
 
@@ -45,6 +46,7 @@ registerLocaleData(en);
     CreateEmployerComponent,
     EmployerProfileComponent,
     UpdateEmployerComponent,
+    UserprofileComponent,
   ],
   imports: [
     BrowserModule,

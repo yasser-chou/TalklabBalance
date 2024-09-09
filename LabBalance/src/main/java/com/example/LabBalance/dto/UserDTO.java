@@ -17,4 +17,7 @@ public class UserDTO {
     private String firstname;
     private String lastname;
     private String phone;
+    private String img;  // Add this field for the profile picture
+
+
 }

@@ -4,7 +4,7 @@
     <!-- Sidebar Section -->
     <nz-sider>
       <div class="logo">
-        <img src="assets/talklablogo.png" alt="TalkLab Logo">
+        <img src="assets/TalkLabLogo.png" alt="TalkLab Logo">
       </div>
       <ul nz-menu nzTheme="dark" nzMode="horizontal">
         <li nz-menu-item routerLink="/dashboard">
@@ -41,9 +41,17 @@
     <!-- Content Section -->
     <nz-layout class="right-layout">
       <nz-header class="header">
-        <div class="logout-button" *ngIf="isClientLoggedIn">
-          <a (click)="logout()" routerLinkActive="Active">Logout</a>
+        <div class="user-profile" (click)="toggleDropdown()">
+          <span class="user-name">{{ user?.firstname }} {{ user?.lastname }}</span>
+          <img [src]="user?.profilePicture || ''" alt="User Profile" class="user-image">
+          <div class="dropdown-menu" *ngIf="isDropdownOpen">
+            <a class="logout-button" (click)="logout()">
+              <span nz-icon nzType="logout" nzTheme="outline" nzSize="24"></span> Logout
+            </a>
+          </div>
+
         </div>
+
       </nz-header>
       <nz-content>
         <div class="inner-content">
@@ -63,6 +71,5 @@
 </div>
 <!-- Modal Content -->
 <div *ngIf="isModalActive" class="modal-container">
-  <!-- Your modal component should be displayed here -->
   <app-password-prompt></app-password-prompt>
 </div>

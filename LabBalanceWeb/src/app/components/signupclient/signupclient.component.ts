@@ -12,6 +12,7 @@ import {NzNotificationService} from "ng-zorro-antd/notification";
 export class SignupClientComponent implements OnInit {
   validateForm!: FormGroup;
   formSubmitted = false;
+  selectedFile: File | null = null; // To store the selected profile picture
 
   constructor(
     private fb: FormBuilder,
@@ -31,24 +32,33 @@ export class SignupClientComponent implements OnInit {
     });
   }
 
-
-  submitForm() {
-    this.authService.registerClient(this.validateForm.value).subscribe(res=>
-    {
-        this.notification
-          .success('SUCCESS',
-            'Sign up succefully',
-            {nzDuration:5000});
-        this.router.navigateByUrl('/login')
-
-    },error => {
-      this.notification
-        .error('ERROR',
-          `${error.error}`,
-          {nzDuration:5000});
-
-    });
+// Handle file selection
+  onFileSelected(event: any) {
+    this.selectedFile = event.target.files[0];
   }
+
+  // Submit the registration form along with the profile picture
+  submitForm(): void {
+    const signupRequestDTO = {
+      username: this.validateForm.get('username')?.value,
+      firstname: this.validateForm.get('firstname')?.value,
+      lastname: this.validateForm.get('lastname')?.value,
+      phone: this.validateForm.get('phone')?.value,
+      password: this.validateForm.get('password')?.value
+    };
+
+    // Pass both the signupRequestDTO and the selected file to the service
+    this.authService.registerClient(signupRequestDTO, this.selectedFile).subscribe(
+      (res) => {
+        this.notification.success('SUCCESS', 'Sign up successfully', { nzDuration: 5000 });
+        this.router.navigateByUrl('/login');
+      },
+      (error) => {
+        this.notification.error('ERROR', `${error.error}`, { nzDuration: 5000 });
+      }
+    );
+  }
+
 
 
 }

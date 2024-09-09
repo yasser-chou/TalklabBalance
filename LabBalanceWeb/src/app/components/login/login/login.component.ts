@@ -39,8 +39,8 @@ export class LoginComponent implements OnInit{
         this.validateForm.get('password')!.value
       ).subscribe({
         next: (res) => {
-          console.log(res);
-          this.handleLoginSuccess();
+          console.log('Login response:', res.body);  // Debugging: Log the full response
+          this.handleLoginSuccess();  // Handle successful login
         },
         error: (error) => {
           console.log(error);
@@ -54,9 +54,11 @@ export class LoginComponent implements OnInit{
 
   private handleLoginSuccess(): void {
     if (this.userStorageService.isClientLoggedIn()) {
+      console.log('Login successful, navigating to dashboard...');  // Debugging
       this.router.navigateByUrl('/dashboard').catch(err => console.error('Failed to navigate:', err));
     }
   }
+
 
 
 }

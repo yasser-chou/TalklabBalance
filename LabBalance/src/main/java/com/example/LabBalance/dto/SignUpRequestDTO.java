@@ -17,4 +17,6 @@ public class SignUpRequestDTO {
     private String firstname;
     private String lastname;
     private String phone;
+    private String img;  // Field for storing the image path
+
 }

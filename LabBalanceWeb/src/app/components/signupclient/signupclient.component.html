@@ -1,4 +1,3 @@
-
 <div class="bg">
   <div class="parent">
     <div class="child">
@@ -8,13 +7,13 @@
       <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
 
         <nz-form-item>
-          <nz-form-control nzHasFeedback neErrorTip="the input isn't valid username">
+          <nz-form-control nzHasFeedback nzErrorTip="The input isn't a valid username">
             <input nz-input placeholder="Username" formControlName="username" id="username" />
           </nz-form-control>
         </nz-form-item>
 
         <nz-form-item>
-          <nz-form-control nzHasFeedback neErrorTip="the input isn't valid password">
+          <nz-form-control nzHasFeedback nzErrorTip="The input isn't a valid password">
             <input nz-input type="password" placeholder="Password" formControlName="password" id="password" />
           </nz-form-control>
         </nz-form-item>
@@ -27,19 +26,26 @@
 
         <nz-form-item>
           <nz-form-control>
-            <input nz-input placeholder="FirstName" formControlName="firstname" id="firstname" />
+            <input nz-input placeholder="First Name" formControlName="firstname" id="firstname" />
           </nz-form-control>
         </nz-form-item>
 
         <nz-form-item>
           <nz-form-control>
-            <input nz-input placeholder="Lastname" formControlName="lastname" id="lastname" />
+            <input nz-input placeholder="Last Name" formControlName="lastname" id="lastname" />
           </nz-form-control>
         </nz-form-item>
 
         <nz-form-item>
           <nz-form-control>
             <input nz-input placeholder="Phone" formControlName="phone" id="phone" />
+          </nz-form-control>
+        </nz-form-item>
+
+        <!-- File input for profile picture -->
+        <nz-form-item>
+          <nz-form-control>
+            <input type="file" (change)="onFileSelected($event)" />
           </nz-form-control>
         </nz-form-item>
 
@@ -51,4 +57,3 @@
     </div>
   </div>
 </div>
-

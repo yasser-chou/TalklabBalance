@@ -5,6 +5,7 @@ import com.example.LabBalance.dao.repository.UserRepository;
 import com.example.LabBalance.dto.AuthenticationRequest;
 import com.example.LabBalance.dto.SignUpRequestDTO;
 import com.example.LabBalance.dto.UserDTO;
+import com.example.LabBalance.exceptions.ResourceNotFoundException;
 import com.example.LabBalance.services.authentication.AuthService;
 import com.example.LabBalance.services.jwt.UserDetailsServiceImpl;
 import com.example.LabBalance.util.JwtUtil;
@@ -19,8 +20,13 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -49,14 +55,40 @@ public class AuthenticationController {
     }
 
     @PostMapping("/client/sign-up")
-    public ResponseEntity<?> signupClient(@RequestBody SignUpRequestDTO signUpRequestDTO) {
-        if (authService.presentByUsername(signUpRequestDTO.getUsername())) {
+    public ResponseEntity<?> signupClient(
+            @RequestParam("username") String username,
+            @RequestParam("password") String password,
+            @RequestParam("firstname") String firstname,
+            @RequestParam("lastname") String lastname,
+            @RequestParam("phone") String phone,
+            @RequestParam("file") MultipartFile file) throws IOException {
+
+        // Check if a user already exists with the provided username
+        if (authService.presentByUsername(username)) {
             return new ResponseEntity<>("User already exists with this username!", HttpStatus.NOT_ACCEPTABLE);
         }
 
+        // Save the uploaded profile picture
+        String imgPath = null;
+        if (file != null && !file.isEmpty()) {
+            imgPath = saveImage(file);  // Save the profile picture and get the file path
+        }
+
+        // Create the SignUpRequestDTO and set the image path
+        SignUpRequestDTO signUpRequestDTO = new SignUpRequestDTO();
+        signUpRequestDTO.setUsername(username);
+        signUpRequestDTO.setPassword(password);
+        signUpRequestDTO.setFirstname(firstname);
+        signUpRequestDTO.setLastname(lastname);
+        signUpRequestDTO.setPhone(phone);
+        signUpRequestDTO.setImg(imgPath);  // Set the image path
+
+        // Call the authService to register the new user
         UserDTO createUser = authService.signupClient(signUpRequestDTO);
+
         return new ResponseEntity<>(createUser, HttpStatus.OK);
     }
+
 
     @PostMapping("/authenticate")
     public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest) {
@@ -80,9 +112,46 @@ public class AuthenticationController {
         Map<String, String> responseBody = new HashMap<>();
         responseBody.put("token", jwt);
         responseBody.put("userId", String.valueOf(user.getId())); // You can include additional information here if needed
+        responseBody.put("firstname", user.getFirstname());
+        responseBody.put("lastname", user.getLastname());
+        responseBody.put("profilePicture", user.getImg());  // Assuming 'img' is the field storing profile picture URL
 
         // Returning the response with the token in the body
         return ResponseEntity.ok(responseBody);
     }
+
+    @PostMapping("/user/update-picture")
+    public ResponseEntity<?> updateUserPicture(@RequestParam("userId") Long userId, @RequestParam("file") MultipartFile file) throws IOException {
+        User user = userRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException("User not found"));
+
+        // Save the file to a directory or a cloud service and get the URL or path
+        String imgPath = saveImage(file);  // Implement the file saving logic
+
+        user.setImg(imgPath);
+        userRepository.save(user);
+
+        return ResponseEntity.ok("Profile picture updated successfully");
+    }
+
+    private static final String UPLOAD_DIRECTORY = "uploads/images/"; // Define upload path
+
+    public String saveImage(MultipartFile file) throws IOException {
+        // Ensure the upload directory exists
+        File uploadDir = new File(UPLOAD_DIRECTORY);
+        if (!uploadDir.exists()) {
+            uploadDir.mkdirs();  // Create the directory if it doesn't exist
+        }
+
+        // Get the original filename
+        String filename = file.getOriginalFilename();
+        Path filePath = Paths.get(UPLOAD_DIRECTORY + filename);
+
+        // Save the file locally
+        Files.write(filePath, file.getBytes());
+
+        // Return the relative file path for serving the file later
+        return "/uploads/images/" + filename;
+    }
+
 }
 

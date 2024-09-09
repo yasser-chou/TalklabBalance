@@ -51,7 +51,7 @@ export class DashboardComponent implements AfterViewInit {
           },
           formatter: (params) => {
             const income = this.incomes[params[0].dataIndex];
-            return `${income.date}<br/>${income.title}: $${income.amount}`;
+            return `${income.date}<br/>Total gain: $${income.amount}`;
           }
         },
         xAxis: {
@@ -135,7 +135,7 @@ export class DashboardComponent implements AfterViewInit {
           },
           formatter: (params) => {
             const expense = this.expenses[params[0].dataIndex];
-            return `${expense.date}<br/>${expense.title}: $${expense.amount}`;
+            return `${expense.date}<br/>Total lost: $${expense.amount}`;
           }
         },
         xAxis: {
@@ -262,8 +262,11 @@ export class DashboardComponent implements AfterViewInit {
   getChartData() {
     this.statsService.getChart().subscribe(res => {
       if (res.expenseList != null && res.incomeList != null) {
-        this.incomes = res.incomeList;
-        this.expenses = res.expenseList;
+        // Group the incomes by date and sum the amounts for each day
+        this.incomes = this.groupByDate(res.incomeList);
+
+        // Group the expenses by date and sum the amounts for each day
+        this.expenses = this.groupByDate(res.expenseList);
 
         console.log('Incomes:', this.incomes);  // Log incomes to check structure
         console.log('Expenses:', this.expenses);  // Log expenses to check structure
@@ -276,6 +279,21 @@ export class DashboardComponent implements AfterViewInit {
         console.error('No chart data available');
       }
     });
+  }
+
+  // Helper function to group data by date and sum amounts
+  groupByDate(data: any[]): any[] {
+    const groupedData = data.reduce((acc, item) => {
+      const date = item.date; // assuming date is already formatted as needed
+      if (!acc[date]) {
+        acc[date] = { date: date, amount: 0 };
+      }
+      acc[date].amount += item.amount;
+      return acc;
+    }, {});
+
+    // Convert the result back to an array
+    return Object.values(groupedData);
   }
 
 

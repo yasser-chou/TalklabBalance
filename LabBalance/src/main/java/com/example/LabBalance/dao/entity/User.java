@@ -21,6 +21,9 @@ public class User {
     private String lastname;
     private String phone;
 
+    private String img;  // Add this field for profile picture URL or file path
+
+
     @Column(nullable = false)
     private boolean firstLogin = true;
 
@@ -33,6 +36,7 @@ public class User {
         userDto.setFirstname(firstname);
         userDto.setUsername(username);
 
+        userDto.setImg(img);  // Pass image to DTO
 
 
 

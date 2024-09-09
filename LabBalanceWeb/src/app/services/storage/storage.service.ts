@@ -20,14 +20,18 @@ export class UserStorageService {
   }
 
   public saveUser(user: any): void {
-    window.localStorage.removeItem(USER);
-    window.localStorage.setItem(USER, JSON.stringify(user));
+    console.log('Saving user to localStorage:', user);  // Debugging: Check what user data is being saved
+    window.localStorage.removeItem(USER);  // Remove old data
+    window.localStorage.setItem(USER, JSON.stringify(user));  // Save new data
   }
 
   public getUser(): any {
     const userString = localStorage.getItem(USER);
+    console.log('Retrieved user from localStorage:', userString);  // Debugging
+
     return userString ? JSON.parse(userString) : null;
   }
+
 
   public getUserId(): string {
     const user = this.getUser();
@@ -47,4 +51,6 @@ export class UserStorageService {
     const token = this.getToken();
     return token ? this.jwtHelper.isTokenExpired(token) : true;
   }
+
+
 }
