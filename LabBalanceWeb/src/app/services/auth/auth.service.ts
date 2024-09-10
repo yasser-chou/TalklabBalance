@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
-import { map, Observable } from 'rxjs';
+import {map, Observable, throwError} from 'rxjs';
 import { UserStorageService } from '../storage/storage.service';
 import { Router } from '@angular/router';
+import {catchError} from "rxjs/operators";
 
 const BASIC_URL = 'http://localhost:8080/';
 export const AUTH_HEADER = 'authorization';
@@ -18,28 +19,32 @@ export class AuthService {
     private router: Router
   ) {}
 
+  private baseUrl = '/api/images';
+
   registerClient(signupRequestDTO: any, file: File): Observable<any> {
     const formData = new FormData();
-
-    // Append fields from signupRequestDTO to formData
     formData.append('username', signupRequestDTO.username);
     formData.append('firstname', signupRequestDTO.firstname);
     formData.append('lastname', signupRequestDTO.lastname);
     formData.append('phone', signupRequestDTO.phone);
     formData.append('password', signupRequestDTO.password);
-
-    // Append the file to formData if it exists
     if (file) {
       formData.append('file', file);
     }
 
-    // Send the FormData as the body of the POST request
-    return this.http.post(BASIC_URL + 'client/sign-up', formData);
+    return this.http.post(BASIC_URL + 'client/sign-up', formData).pipe(
+      catchError(error => {
+        console.error('Registration error:', error.message || error);
+        return throwError(error);
+      })
+    );
   }
 
 
+
+
   login(username: string, password: string): Observable<HttpResponse<any>> {
-    return this.http.post(BASIC_URL + 'authenticate', { username, password }, { observe: 'response' })
+    return this.http.post<any>(BASIC_URL + 'authenticate', { username, password }, { observe: 'response' })
       .pipe(
         map((res: HttpResponse<any>) => {
           console.log('Full login response:', res.body);  // Debugging: Check the entire backend response
@@ -50,30 +55,37 @@ export class AuthService {
           const lastname = res.body.lastname;
           const profilePicture = res.body.profilePicture;
 
-          // Ensure token and user details are present before saving
           if (token) {
-            this.userStorageService.saveToken(token);  // Save the token
+            this.userStorageService.saveToken(token);
           } else {
             console.error('Token not found in the response body');
           }
 
           if (userId && firstname && lastname) {
-            // Save user details to localStorage
             const userDetails = {
               userId: userId,
               firstname: firstname,
               lastname: lastname,
-              profilePicture: profilePicture || null  // Use null if profile picture is not available
+              profilePicture: profilePicture || null
             };
-            this.userStorageService.saveUser(userDetails);  // Save the user details
-            console.log('User details saved to localStorage:', userDetails);  // Debugging
+            this.userStorageService.saveUser(userDetails);
+            console.log('User details saved to localStorage:', userDetails);
           } else {
             console.error('User details not found in the response body');
           }
 
           return res;
+        }),
+        catchError(error => {
+          console.error('Login error:', error);  // Log full error object
+          return throwError(error);
         })
       );
+  }
+
+
+  getImage(filename: string): Observable<Blob> {
+    return this.http.get(`http://localhost:8080/images/${filename}`, { responseType: 'blob' });
   }
 
 

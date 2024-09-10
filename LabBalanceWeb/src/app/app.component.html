@@ -43,7 +43,7 @@
       <nz-header class="header">
         <div class="user-profile" (click)="toggleDropdown()">
           <span class="user-name">{{ user?.firstname }} {{ user?.lastname }}</span>
-          <img [src]="user?.profilePicture || ''" alt="User Profile" class="user-image">
+          <img *ngIf="imageUrl" [src]="imageUrl" alt="Profile Image" class="user-image" />
           <div class="dropdown-menu" *ngIf="isDropdownOpen">
             <a class="logout-button" (click)="logout()">
               <span nz-icon nzType="logout" nzTheme="outline" nzSize="24"></span> Logout

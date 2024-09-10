@@ -20,4 +20,6 @@ public interface ExpenseRepository extends JpaRepository<Expense,Long> {
 
     Optional<Expense> findFirstByOrderByDateDesc();
 
+    List<Expense> findByEmployeeId(Long employeeId);
+
 }

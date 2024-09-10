@@ -22,6 +22,8 @@ public class User {
     private String phone;
 
     private String img;  // Add this field for profile picture URL or file path
+    private String profilePicture;  // Store the filename or path of the profile picture
+
 
 
     @Column(nullable = false)

@@ -31,7 +31,7 @@ public class WebSecurityConfig {
         http.csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/authenticate", "/client/sign-up","/login").permitAll()
-                        .requestMatchers("/api/**").authenticated()
+                        .requestMatchers("/api/**","/user/profile-image").authenticated()
                 )
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)

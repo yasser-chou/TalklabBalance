@@ -25,10 +25,29 @@
           <div class="attribute-value">{{employee.salary}} Dhs</div>
         </div>
       </div>
+
       <div class="action-buttons">
         <button nz-button nzType="primary" [routerLink]="['/update-employee', employee.id]">Update</button>
         <button class="red" (click)="deleteEmployee(employee.id)" nz-button nzType="primary" nzDanger>Delete</button>
+        <!-- Add new button for showing expenses -->
+        <button nz-button nzType="default" (click)="showEmployeeExpenses()">Show Expenses</button>
       </div>
+
+      <!-- Expenses section -->
+      <div class="expenses-section" *ngIf="expenses && expenses.length">
+        <h4>Expenses for {{employee.firstname}} {{employee.lastname}}</h4>
+        <ul>
+          <li *ngFor="let expense of expenses">
+            {{expense.description}} - {{expense.amount}} Dhs
+          </li>
+        </ul>
+      </div>
+
+      <!-- Message if no expenses are found -->
+      <div class="expenses-section" *ngIf="expenses && !expenses.length">
+        <p>No expenses found for this employee.</p>
+      </div>
+
     </div>
   </div>
 </div>

@@ -1,9 +1,10 @@
-import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
-import {NzModalService} from "ng-zorro-antd/modal";
-import {NzNotificationService} from "ng-zorro-antd/notification";
-import {EmployeeService} from "../../services/employee/employee.service";
-import { Location } from '@angular/common';  // Import Location from @angular/common
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from "@angular/router";
+import { NzModalService } from "ng-zorro-antd/modal";
+import { NzNotificationService } from "ng-zorro-antd/notification";
+import { EmployeeService } from "../../services/employee/employee.service";
+import { Location } from '@angular/common';
+import { ExpenseService } from "../../services/expense/expense.service";  // Import Location from @angular/common
 
 @Component({
   selector: 'app-employer-profile',
@@ -13,21 +14,25 @@ import { Location } from '@angular/common';  // Import Location from @angular/co
 export class EmployerProfileComponent implements OnInit {
   employee: any;
   employees: any;
-  employeeId: any = this.activatedroute.snapshot.params['id'];
+  employeeId: any;
+  expenses: any[] = [];
 
   constructor(
     private activatedroute: ActivatedRoute,
     private employeeService: EmployeeService,
+    private expenseService: ExpenseService,
     private modal: NzModalService, // Used for popups
     private notification: NzNotificationService,
     private location: Location  // Use Location for navigating back
   ) {}
 
   ngOnInit(): void {
+    this.employeeId = +this.activatedroute.snapshot.paramMap.get('id'); // Get employeeId from route
     this.getAllEmployees();
     this.getEmployeeById();
   }
 
+  // Fetch a specific employee by ID
   getEmployeeById() {
     this.employeeService.getEmployeeById(this.employeeId).subscribe(
       (res) => {
@@ -44,10 +49,12 @@ export class EmployerProfileComponent implements OnInit {
     );
   }
 
+  // Method to handle base64 image display
   updateImg(img) {
     return 'data:image/jpeg;base64,' + img;
   }
 
+  // Fetch all employees (if needed for a list or other purposes)
   getAllEmployees() {
     this.employeeService.getAllEmployees().subscribe(
       (res) => {
@@ -64,6 +71,7 @@ export class EmployerProfileComponent implements OnInit {
     );
   }
 
+  // Confirm and delete employee
   deleteEmployee(employeeId: any) {
     this.modal.confirm({
       nzTitle: 'Are you sure you want to delete this employee?',
@@ -77,6 +85,7 @@ export class EmployerProfileComponent implements OnInit {
     });
   }
 
+  // Perform the delete action and handle navigation
   confirmDeleteEmployee(employeeId: any) {
     this.employeeService.deleteEmployee(employeeId).subscribe(
       res => {
@@ -98,4 +107,20 @@ export class EmployerProfileComponent implements OnInit {
       }
     );
   }
+
+  // Fetch expenses related to the employee
+  showEmployeeExpenses(): void {
+    console.log('Employee ID:', this.employeeId); // Check if employeeId is correct
+    this.expenseService.getExpensesByEmployee(this.employeeId).subscribe(
+      (data) => {
+        this.expenses = data;
+        console.log('Fetched expenses:', this.expenses); // Log the response
+      },
+      (error) => {
+        console.error('Error fetching expenses:', error);
+        this.notification.error('Error', 'Failed to fetch expenses for this employee.');
+      }
+    );
+  }
+
 }

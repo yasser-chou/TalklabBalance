@@ -102,6 +102,10 @@ public class ExpenseServiceImpl implements ExpenseService {
             }
         }
 
+    public List<Expense> getExpensesByEmployee(Long employeeId) {
+        return expenseRepository.findByEmployeeId(employeeId);
+    }
+
 }
 
 

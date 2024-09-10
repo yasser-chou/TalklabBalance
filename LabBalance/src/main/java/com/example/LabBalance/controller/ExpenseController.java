@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/expense")
 @RequiredArgsConstructor
@@ -16,6 +18,8 @@ import org.springframework.web.bind.annotation.*;
 public class ExpenseController {
 
     private final ExpenseService expenseService;
+
+
 
     @PostMapping
     public ResponseEntity<?> postExpense(@RequestBody ExpenseDTO dto){
@@ -66,4 +70,14 @@ public class ExpenseController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Something went wrong");
         }
     }
+
+    @GetMapping("/employee/{employeeId}")
+    public ResponseEntity<List<Expense>> getExpensesByEmployee(@PathVariable Long employeeId) {
+        List<Expense> expenses = expenseService.getExpensesByEmployee(employeeId);
+        if (expenses.isEmpty()) {
+            return ResponseEntity.noContent().build(); // Return 204 No Content if no expenses found
+        }
+        return ResponseEntity.ok(expenses); // Return 200 OK with the list of expenses
+    }
+
 }
