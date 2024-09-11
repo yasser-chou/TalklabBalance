@@ -16,6 +16,8 @@ export class EmployerProfileComponent implements OnInit {
   employees: any;
   employeeId: any;
   expenses: any[] = [];
+  showExpenses: boolean = false; // New boolean to control expenses section visibility
+
 
   constructor(
     private activatedroute: ActivatedRoute,
@@ -30,6 +32,7 @@ export class EmployerProfileComponent implements OnInit {
     this.employeeId = +this.activatedroute.snapshot.paramMap.get('id'); // Get employeeId from route
     this.getAllEmployees();
     this.getEmployeeById();
+
   }
 
   // Fetch a specific employee by ID
@@ -115,10 +118,14 @@ export class EmployerProfileComponent implements OnInit {
       (data) => {
         this.expenses = data;
         console.log('Fetched expenses:', this.expenses); // Log the response
+        this.showExpenses = true; // Show the expenses section
+
       },
       (error) => {
         console.error('Error fetching expenses:', error);
         this.notification.error('Error', 'Failed to fetch expenses for this employee.');
+        this.showExpenses = false;
+
       }
     );
   }

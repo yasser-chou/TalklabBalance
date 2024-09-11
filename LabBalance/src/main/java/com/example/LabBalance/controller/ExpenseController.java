@@ -71,7 +71,7 @@ public class ExpenseController {
         }
     }
 
-    @GetMapping("/employee/{employeeId}")
+    @GetMapping("/employee/{employeeId}/expenses")
     public ResponseEntity<List<Expense>> getExpensesByEmployee(@PathVariable Long employeeId) {
         List<Expense> expenses = expenseService.getExpensesByEmployee(employeeId);
         if (expenses.isEmpty()) {

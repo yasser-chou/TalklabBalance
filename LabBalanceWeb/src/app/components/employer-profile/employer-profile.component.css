@@ -29,7 +29,7 @@
 
 .profile-image {
   width: 150px;
-  height: 200px; /* Adjust height as needed */
+  height: 200px;
   object-fit: cover;
   margin-bottom: 20px;
 }
@@ -59,36 +59,103 @@
   color: #666666;
 }
 
+/* Button styles - Centering text inside buttons */
 .action-buttons {
   display: flex;
   justify-content: center;
-  gap: 10px; /* Add space between the buttons */
+  gap: 10px;
+  flex-wrap: wrap;
+  width: 100%;
   margin-top: 20px;
 }
 
-.action-buttons .btn-primary,
-.action-buttons .btn-danger {
-  padding: 10px 20px;
+/* Primary button (Update) */
+.action-buttons button[nzType="primary"],
+.action-buttons button[nzDanger],
+.action-buttons button[nzType="default"] {
+  background-color: #007bff; /* For Update button */
+  color: white;
   border-radius: 5px;
   border: none;
-  cursor: pointer;
-  transition: background-color 0.3s;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  text-align: center;
+  transition: background-color 0.3s ease;
+  width: 100%; /* Stretch button across container width */
 }
 
-.action-buttons .btn-primary {
-  background-color: #007bff;
-  color: white;
+.action-buttons button[nzType="primary"]:hover {
+  background-color: #0056b3; /* Darker blue on hover */
 }
 
-.action-buttons .btn-danger {
-  background-color: #e44d4d;
-  color: white;
+.action-buttons button[nzDanger]:hover {
+  background-color: #c93030; /* Darker red on hover */
 }
 
-.action-buttons .btn-primary:hover {
-  background-color: #0056b3;
+.action-buttons button[nzType="default"]:hover {
+  background-color: #5a6268; /* Darker grey on hover */
 }
 
-.action-buttons .btn-danger:hover {
-  background-color: #c93030;
+/* Style the expense section horizontally */
+.expenses-section-container {
+  display: flex;
+  justify-content: flex-start;
+  padding: 20px;
+  width: 100%;
+}
+
+/* Horizontal card list */
+.card-list-horizontal {
+  display: flex;
+  flex-direction: row; /* Display items in a row */
+  gap: 20px;
+  padding: 20px;
+  overflow-x: auto;
+  max-width: 100%; /* Ensure it stays within container */
+}
+
+/* Row holding the expense cards */
+.expenses-row {
+  display: flex;
+  flex-wrap: nowrap; /* Prevent wrapping to a new line */
+  gap: 20px; /* Space between the cards */
+  overflow-x: auto; /* Enable horizontal scrolling if necessary */
+  padding: 10px;
+}
+
+/* Individual card styles */
+.card-horizontal {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  min-width: 200px;
+  padding: 15px;
+  background-color: #fff;
+  transition: box-shadow 0.3s ease;
+  flex: 0 0 auto; /* Prevent cards from shrinking */
+}
+
+.card-horizontal:hover {
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.card-header {
+  font-weight: bold;
+  margin-bottom: 10px;
+  font-size: 1.1em;
+}
+
+.card-body p {
+  margin: 0;
+}
+
+/* Style for the no expenses message */
+.no-expenses-message {
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  text-align: center;
+  color: #777;
 }

@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.Base64;
+
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService{
@@ -97,5 +99,28 @@ public class EmployeeServiceImpl implements EmployeeService{
         }
         return false;
     }
+
+
+    @Override
+    public List<EmployeeDTO> searchEmployees(String name) {
+        List<Employee> employees = employeeRepository.findByFirstnameContainingIgnoreCaseOrLastnameContainingIgnoreCase(name, name);
+
+        return employees.stream().map(employee -> {
+            EmployeeDTO dto = new EmployeeDTO();
+            dto.setId(employee.getId());
+            dto.setFirstname(employee.getFirstname());
+            dto.setLastname(employee.getLastname());
+
+            // Check if the image is available and encode it as Base64
+            if (employee.getImg() != null) {
+                dto.setReturnedImg(Base64.getEncoder().encodeToString(employee.getImg()));
+            } else {
+                dto.setReturnedImg(null);
+            }
+
+            return dto;
+        }).collect(Collectors.toList());
+    }
+
 
 }

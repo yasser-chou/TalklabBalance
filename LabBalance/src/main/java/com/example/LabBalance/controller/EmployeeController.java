@@ -1,5 +1,6 @@
 package com.example.LabBalance.controller;
 
+import com.example.LabBalance.dao.entity.Employee;
 import com.example.LabBalance.dto.EmployeeDTO;
 import com.example.LabBalance.services.employee.EmployeeService;
 import org.springframework.http.HttpStatus;
@@ -74,6 +75,13 @@ public class EmployeeController {
         }else{
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
+    }
+
+    // GET: Search for employees by name
+    @GetMapping("/search")
+    public ResponseEntity<List<EmployeeDTO>> searchEmployees(@RequestParam("name") String name) {
+        List<EmployeeDTO> employees = employeeService.searchEmployees(name);
+        return new ResponseEntity<>(employees, HttpStatus.OK);
     }
 
 

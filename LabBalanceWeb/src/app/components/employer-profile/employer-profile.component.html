@@ -1,3 +1,4 @@
+<!-- Profile Container -->
 <div class="profile-container">
   <div class="list-item" *ngIf="employee">
     <div class="profile-card">
@@ -27,27 +28,33 @@
       </div>
 
       <div class="action-buttons">
+        <button nz-button nzType="default" (click)="showEmployeeExpenses()">Recent Expenses</button>
         <button nz-button nzType="primary" [routerLink]="['/update-employee', employee.id]">Update</button>
         <button class="red" (click)="deleteEmployee(employee.id)" nz-button nzType="primary" nzDanger>Delete</button>
-        <!-- Add new button for showing expenses -->
-        <button nz-button nzType="default" (click)="showEmployeeExpenses()">Show Expenses</button>
       </div>
 
-      <!-- Expenses section -->
-      <div class="expenses-section" *ngIf="expenses && expenses.length">
-        <h4>Expenses for {{employee.firstname}} {{employee.lastname}}</h4>
-        <ul>
-          <li *ngFor="let expense of expenses">
-            {{expense.description}} - {{expense.amount}} Dhs
-          </li>
-        </ul>
-      </div>
+      <!-- Expenses Section -->
+      <div class="expenses-section-container">
+        <div class="expenses-section card-list-horizontal" *ngIf="showExpenses && expenses.length">
+          <div class="expenses-row">
+            <div *ngFor="let expense of expenses" class="card-horizontal">
+              <div class="card-header">Date: {{ expense.date | date:'MM/dd/yyyy' }}</div>
+              <div class="card-body">
+                <p><strong>Title:</strong> {{ expense.title }}</p>
+                <p><strong>Amount:</strong> {{ expense.amount }} Dhs</p>
+                <p><strong>Category:</strong> {{ expense.category }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
 
-      <!-- Message if no expenses are found -->
-      <div class="expenses-section" *ngIf="expenses && !expenses.length">
-        <p>No expenses found for this employee.</p>
+        <!-- Message if no expenses are found -->
+        <div class="expenses-section card-list-horizontal" *ngIf="showExpenses && !expenses.length">
+          <div class="no-expenses-message">
+            <p>No expenses found for this employee.</p>
+          </div>
+        </div>
       </div>
-
     </div>
   </div>
 </div>

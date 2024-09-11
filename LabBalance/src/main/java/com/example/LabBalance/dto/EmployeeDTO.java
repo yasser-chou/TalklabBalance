@@ -17,7 +17,7 @@ public class EmployeeDTO {
     private String phone;
     private LocalDate startDate;
     private MultipartFile img;
-    private byte[] returnedImg;
+    private String returnedImg;
     private Long userId;
 
 

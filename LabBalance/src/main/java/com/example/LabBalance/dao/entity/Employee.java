@@ -1,14 +1,10 @@
 package com.example.LabBalance.dao.entity;
 
-
 import com.example.LabBalance.dto.EmployeeDTO;
 import jakarta.persistence.*;
 import lombok.Data;
-import org.springframework.web.multipart.MultipartFile;
-
 import java.time.LocalDate;
-
-import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
+import java.util.Base64;
 
 @Entity
 @Data
@@ -16,7 +12,7 @@ public class Employee {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
+    private Long id;
     private String firstname;
     private String lastname;
     private String position;
@@ -29,9 +25,10 @@ public class Employee {
     @Column(columnDefinition = "longblob")
     private byte[] img;
 
-    public EmployeeDTO getemployeeDTO(){
+    // Method to convert Employee entity to EmployeeDTO
+    public EmployeeDTO getemployeeDTO() {
         EmployeeDTO employeeDTO = new EmployeeDTO();
-        employeeDTO.setId(Id);
+        employeeDTO.setId(id);
         employeeDTO.setFirstname(firstname);
         employeeDTO.setLastname(lastname);
         employeeDTO.setEmail(email);
@@ -39,10 +36,15 @@ public class Employee {
         employeeDTO.setPosition(position);
         employeeDTO.setSalary(salary);
         employeeDTO.setStartDate(startDate);
-        employeeDTO.setReturnedImg(img);
+
+        // Convert byte[] img to Base64 string and set it to returnedImg
+        if (img != null) {
+            String base64Image = Base64.getEncoder().encodeToString(img);
+            employeeDTO.setReturnedImg(base64Image);
+        } else {
+            employeeDTO.setReturnedImg(null); // Set null if no image is available
+        }
 
         return employeeDTO;
-
     }
-
 }

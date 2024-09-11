@@ -1,3 +1,4 @@
+/* Background container for employee cards */
 .bg {
   background-color: #f0f2f5;
   min-height: 91vh;
@@ -8,6 +9,7 @@
   gap: 20px; /* Add space between the cards */
 }
 
+/* Employee card */
 .list-item {
   width: 300px; /* Set a fixed width for each employee card */
   background-color: #ffffff;
@@ -25,6 +27,7 @@
   transform: translateY(-5px);
 }
 
+/* Employee profile image */
 .profile-image {
   width: 60px; /* Adjust the image size as needed */
   height: 60px;
@@ -34,6 +37,7 @@
   margin-bottom: 10px;
 }
 
+/* Employee details */
 .employee-details {
   display: flex;
   flex-direction: column;
@@ -48,6 +52,7 @@
   text-align: center;
 }
 
+/* Button styling */
 .view-button {
   margin-top: 30px; /* Add more space between name and button */
   width: 75%; /* Make the button full-width */
@@ -59,3 +64,56 @@
   justify-content: center; /* Center the button horizontally */
   width: 100%;
 }
+
+
+/* Search container styles */
+.search-container {
+  position: fixed; /* Fixed position for better responsiveness */
+  top: 80px; /* Adjust this value to place it below the navbar */
+  right: 20px; /* Keep it aligned to the right */
+  display: flex;
+  align-items: center;
+  width: 50px; /* Initially small */
+  transition: width 0.4s ease; /* Smooth transition for the width */
+  z-index: 1000; /* Keep it on top */
+  background-color: transparent; /* Ensure background does not interfere */
+  padding: 5px; /* Add some padding for better spacing */
+}
+
+.search-icon {
+  font-size: 20px;
+  cursor: pointer;
+  color: #444;
+  margin-right: 10px; /* Space between icon and input */
+  margin-top: 5px; /* Adjust this value to move the icon lower */
+}
+
+.search-input {
+  position: relative;
+  right: 0;
+  width: 0;
+  opacity: 0;
+  border: none;
+  padding: 10px;
+  border-radius: 25px;
+  outline: none;
+  transition: all 0.4s ease;
+  background-color: #f1f1f1;
+}
+
+.search-container.active {
+  width: 250px; /* Expanded width */
+}
+
+.search-container.active .search-input {
+  width: 100%;
+  opacity: 1;
+  padding-left: 30px;
+}
+
+.search-input::placeholder {
+  color: #aaa;
+}
+
+
+
