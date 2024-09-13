@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import { NzModalService } from "ng-zorro-antd/modal";
 import { NzNotificationService } from "ng-zorro-antd/notification";
 import { EmployeeService } from "../../services/employee/employee.service";
@@ -25,7 +25,8 @@ export class EmployerProfileComponent implements OnInit {
     private expenseService: ExpenseService,
     private modal: NzModalService, // Used for popups
     private notification: NzNotificationService,
-    private location: Location  // Use Location for navigating back
+    private location: Location,  // Use Location for navigating back
+     private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -128,6 +129,10 @@ export class EmployerProfileComponent implements OnInit {
 
       }
     );
+  }
+
+  goToAddExpense(employeeId: number): void {
+    this.router.navigate(['/expense'], { queryParams: { employeeId } });
   }
 
 }

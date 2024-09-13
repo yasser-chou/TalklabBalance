@@ -13,6 +13,8 @@ export class SignupClientComponent implements OnInit {
   validateForm!: FormGroup;
   formSubmitted = false;
   selectedFile: File | null = null; // To store the selected profile picture
+  profilePicUrl: string | ArrayBuffer | null = null;  // For the image preview
+
 
   constructor(
     private fb: FormBuilder,
@@ -32,9 +34,16 @@ export class SignupClientComponent implements OnInit {
     });
   }
 
-// Handle file selection
-  onFileSelected(event: any) {
+// Handle file selection and show the image preview
+  onFileSelected(event: any): void {
     this.selectedFile = event.target.files[0];
+    if (this.selectedFile) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        this.profilePicUrl = reader.result;  // Store the preview image
+      };
+      reader.readAsDataURL(this.selectedFile);  // Read the image file and trigger the onload event
+    }
   }
 
   // Submit the registration form along with the profile picture

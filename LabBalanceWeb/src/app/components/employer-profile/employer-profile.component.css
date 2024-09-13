@@ -17,10 +17,11 @@
   background-color: #ffffff;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
+  overflow: visible;
   padding: 20px;
   text-align: center;
   transition: transform 0.3s;
+  position: relative; /* Allows absolute positioning of child elements */
 }
 
 .profile-card:hover {
@@ -69,7 +70,6 @@
   margin-top: 20px;
 }
 
-/* Primary button (Update) */
 .action-buttons button[nzType="primary"],
 .action-buttons button[nzDanger],
 .action-buttons button[nzType="default"] {
@@ -158,4 +158,74 @@
   border-radius: 8px;
   text-align: center;
   color: #777;
+}
+
+/* Position the Add Expense button in the top-right of the card */
+.add-expense-button-container {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 1; /* Ensures the button stays in place */
+}
+
+/* Square shape for Add Expense button */
+.add-expense-button {
+  background-color: #007bff;
+  border: none;
+  color: white;
+  font-size: 32px;
+  width: 50px;
+  height: 50px; /* Square shape */
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  position: relative;
+}
+
+.add-expense-button:hover {
+  background-color: #0056b3;
+}
+
+/* Large plus icon inside the button */
+.plus-icon {
+  font-size: 36px;
+  font-weight: bold;
+  line-height: 1;
+}
+
+/* Tooltip styling - now on one line */
+/* Tooltip positioning - show to the left of the button */
+/* Tooltip styling - now on one line */
+/* Tooltip positioning - show above the button */
+.tooltip {
+  position: absolute; /* Position tooltip relative to the button */
+  bottom: 120%; /* Show the tooltip above the button */
+  left: 50%; /* Center horizontally with the button */
+  transform: translateX(-50%); /* Adjust centering of the tooltip */
+  visibility: hidden;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 10px;
+  white-space: nowrap; /* Ensure text stays on one line */
+  opacity: 0;
+  z-index: 999; /* Ensure tooltip appears above other elements */
+  transition: opacity 0.3s;
+}
+
+.add-expense-button-container:hover .tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+
+
+
+/* Ensure no other elements interfere with button positioning */
+.profile-card {
+  position: relative;
+  padding-top: 60px; /* Space for the fixed button */
 }

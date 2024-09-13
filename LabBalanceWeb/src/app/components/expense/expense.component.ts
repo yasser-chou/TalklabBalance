@@ -4,7 +4,7 @@ import { ExpenseService } from "../../services/expense/expense.service";
 import { NzMessageService } from "ng-zorro-antd/message";
 import { NzModalService } from "ng-zorro-antd/modal";
 import { NzNotificationService } from "ng-zorro-antd/notification";
-import { Router } from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import { SharedService } from "../../services/shared/shared.service";
 
 @Component({
@@ -16,6 +16,10 @@ export class ExpenseComponent implements OnInit {
   expenses: any = [];
   employees: any[] = [];  // Store the list of employees
   expenseForm!: FormGroup;
+  employeeId: number | null = null;
+  showEmployeeDropdown: boolean = true;  // Field to control dropdown visibility
+
+
 
   listOfCategory: any[] = [
     "Bonuses and Incentives",
@@ -33,6 +37,7 @@ export class ExpenseComponent implements OnInit {
     private message: NzMessageService,
     private modal: NzModalService,
     private router: Router,
+    private route: ActivatedRoute,  // Inject ActivatedRoute
     private sharedService: SharedService  // Inject the shared service
   ) {}
 
@@ -50,6 +55,21 @@ export class ExpenseComponent implements OnInit {
       description: [null, Validators.required],
       employeeId: [null, Validators.required]  // Ensure this field is populated
     });
+
+    const currentUrl = this.router.url;
+    console.log('Current URL:', currentUrl);
+    this.showEmployeeDropdown = currentUrl === '/expense';
+
+    // Get the employeeId from query parameters if any
+    this.route.queryParams.subscribe(params => {
+      this.employeeId = params['employeeId'] || null;
+
+      if (this.employeeId) {
+        // Pre-select the employee in the dropdown
+        this.expenseForm.patchValue({ employeeId: this.employeeId });
+      }
+    });
+
   }
 
   // Fetch list of employees
@@ -123,6 +143,13 @@ export class ExpenseComponent implements OnInit {
       this.getAllExpenses();  // Refresh list of expenses
     }, error => {
       this.notification.error("Error!", "Error while deleting expense", { nzDuration: 5000 });
+    });
+  }
+
+  initializeForm(): void {
+    this.expenseForm = this.fb.group({
+      employee: [this.employeeId], // Pre-select employee if available
+      // other form controls
     });
   }
 }

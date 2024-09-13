@@ -13,7 +13,8 @@
               <input type="number" nz-input formControlName="amount" placeholder="Enter amount" />
             </nz-form-control>
           </nz-form-item>
-          <nz-form-item>
+          <!-- Conditionally display the dropdown -->
+          <nz-form-item *ngIf="showEmployeeDropdown">
             <nz-form-control nzErrorTip="Please select the employer!">
               <nz-select nzAllowClear nzPlaceHolder="Select the employer" formControlName="employeeId">
                 <nz-option *ngFor="let employee of employees" [nzLabel]="employee.firstname + ' ' + employee.lastname" [nzValue]="employee.id"></nz-option>
@@ -37,10 +38,11 @@
               </nz-select>
             </nz-form-control>
           </nz-form-item>
-          <button nz-button nzType="primary" nzBlock [disabled]="expenseForm.invalid" class="w-100">Post Expense</button>
+          <button nz-button nzType="primary" nzBlock>Submit</button>
         </form>
       </nz-card>
     </div>
+
 
     <div nz-col nzFlex="3" style="margin-left: 20px;">
       <nz-card nzType="inner" style="margin-top: 16px;" nzTitle="Past Expenses">
@@ -61,5 +63,6 @@
         </div>
       </nz-card>
     </div>
+
   </div>
 </div>

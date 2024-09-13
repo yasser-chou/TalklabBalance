@@ -42,12 +42,38 @@
           </nz-form-control>
         </nz-form-item>
 
-        <!-- File input for profile picture -->
+        <!-- File input for profile picture with custom button -->
         <nz-form-item>
           <nz-form-control>
-            <input type="file" (change)="onFileSelected($event)" />
+            <label for="profilePicInput" style="font-weight: bold;">Profile Picture </label>
+
+            <!-- Hidden native file input -->
+            <input
+              type="file"
+              id="profilePicInput"
+              (change)="onFileSelected($event)"
+              style="display: none;"
+              #fileInput />
+
+            <!-- Custom button to trigger the file input -->
+            <button nz-button (click)="fileInput.click()" type="button">
+              upload file
+            </button>
+
+            <!-- Display the selected file name or 'No file chosen' under the button -->
+            <small style="display: block; margin-top: 8px;">
+              {{ selectedFile ? selectedFile.name : 'No picture chosen' }}
+            </small>
           </nz-form-control>
         </nz-form-item>
+
+        <!-- Display the selected profile picture -->
+        <nz-form-item *ngIf="profilePicUrl">
+          <nz-form-control>
+            <img [src]="profilePicUrl" alt="Profile Picture Preview" width="100" height="100" />
+          </nz-form-control>
+        </nz-form-item>
+
 
         <button nz-button class="login-form-button login-form-margin" [nzType]="'primary'">
           Register

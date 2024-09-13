@@ -27,6 +27,14 @@
         </div>
       </div>
 
+      <!-- Add Expense Button -->
+      <div class="add-expense-button-container">
+        <button class="add-expense-button" (click)="goToAddExpense(employee.id)">
+          <span class="plus-icon">+</span>
+        </button>
+        <span class="tooltip">Add new expense</span>
+      </div>
+
       <div class="action-buttons">
         <button nz-button nzType="default" (click)="showEmployeeExpenses()">Recent Expenses</button>
         <button nz-button nzType="primary" [routerLink]="['/update-employee', employee.id]">Update</button>
